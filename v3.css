@@ -1030,3 +1030,58 @@ body[data-mode="present"] .r-learn .rbody{max-width:1660px}
   .sca i{font-size:13px;padding:5px 1px}
   .sca-n{font-size:16px}.sca-k,.sca-h{font-size:12px}
 }
+
+/* 실습 2 메모장 (2026-11-03) */
+.bk-time{background:#E2D6FF}
+mark.bk-time{color:#1F2733}
+.nmo{display:flex;align-items:center;gap:12px;background:#FFF9E8;border:2.5px solid #F0B46E;border-radius:16px;padding:9px 14px;box-shadow:0 6px 18px rgba(31,39,51,.12)}
+.nmo-n{flex:none;font-size:20px;font-weight:800;color:#B85500}
+.nmo-row{flex:1;display:flex;gap:10px;min-width:0}
+.nmo-f{flex:1;display:flex;align-items:center;gap:8px;min-width:0}
+.nmo-f b{flex:none;padding:5px 9px;border-radius:8px;font-size:19px;color:#1F2733}
+.nmo-f input{flex:1;min-width:0;width:100%;font:inherit;font-size:20px;padding:7px 10px;border:1.5px solid rgba(31,39,51,.25);border-radius:9px;background:#fff;color:var(--ink)}
+.nmo-f input:focus{outline:3px solid rgba(0,126,255,.35);border-color:var(--coral)}
+.nmo-all,.nmo-b button{flex:none;font:inherit;font-size:19px;font-weight:700;padding:7px 14px;border-radius:10px;border:2px solid var(--ink);background:#fff;color:var(--ink);cursor:pointer}
+.nmo-fs{display:grid;gap:7px}
+.nmo-fs .nmo-f b{width:112px;text-align:center}
+.nmo-out-h{margin:10px 0 3px;font-size:18px;font-weight:800;color:var(--coral)}
+.nmo-out{margin:0;padding:9px 11px;background:#F2F6FB;border-radius:10px;font-size:18px;line-height:1.4;color:var(--ink)}
+.nmo-b{display:flex;gap:8px;margin-top:10px}
+.nmo-b .nmo-copy{background:var(--coral);border-color:var(--coral);color:#fff}
+.nmo-full{background:rgba(255,255,255,.96);border-radius:20px;padding:14px 18px;box-shadow:0 8px 26px rgba(31,39,51,.12)}
+.nmo-full h3,.nmo-box h3{margin:0 0 8px;font-size:24px;font-weight:800;color:#B85500}
+.capw.withmemo{grid-template-columns:1fr 1.15fr;align-items:start;gap:20px}
+.withmemo .prc{grid-template-columns:1fr}
+.withmemo .prc-r{display:none}
+.withmemo .prc-goal{font-size:25px}
+.withmemo .checks li{font-size:22px}
+.nmo-ov{position:fixed;inset:0;z-index:120;display:flex;align-items:center;justify-content:center;background:rgba(31,39,51,.45);padding:16px}
+.nmo-box{position:relative;width:min(860px,100%);max-height:92vh;overflow:auto;background:#fff;border-radius:20px;padding:20px 24px}
+.nmo-x{position:absolute;right:12px;top:8px;font-size:30px;line-height:1;border:0;background:none;cursor:pointer;color:var(--ink)}
+@media (max-width:900px){
+  .nmo{flex-wrap:wrap}.nmo-row{flex-direction:column;flex-basis:100%;order:3}
+  .nmo-f input,.nmo-all,.nmo-b button{font-size:16px}.nmo-f b{font-size:15px}.nmo-n{font-size:16px}
+  .capw.withmemo{grid-template-columns:1fr}
+}
+/* 클래스보드 단추 */
+.modebtn.cbbtn{display:inline-flex;align-items:center;text-decoration:none;background:#fff;color:var(--ink)}
+@media (max-width:900px){.modebtn.cbbtn{display:none}}
+
+/* 메모장 띠는 아래 막대 위에 고정, 본문은 그만큼 줄여요 */
+body[data-mode="present"] .nmo{position:absolute;left:130px;right:130px;bottom:126px;z-index:6}
+body[data-mode="present"] .slide.r-pieces:has(.nmo) .rbody{zoom:.84}
+body[data-mode="present"] .slide:has(.nmo) .tpx{grid-template-columns:1fr 820px;align-items:start}
+body[data-mode="present"] .slide:has(.nmo) .tpx-big{aspect-ratio:16/9;width:820px;height:auto}
+body[data-mode="present"] .slide:has(.nmo) .lead2{margin-bottom:6px}
+body[data-mode="present"] .capw.withmemo{margin-right:120px;grid-template-columns:1fr 1.2fr}
+body[data-mode="present"] .withmemo .prc-l{padding:12px 20px}
+body[data-mode="present"] .withmemo .prc-goal{font-size:23px;margin-bottom:8px}
+body[data-mode="present"] .withmemo .checks li{font-size:20px;padding:7px 12px}
+body[data-mode="present"] .withmemo .prc-done{font-size:18px}
+body[data-mode="present"] .withmemo .gorow{margin:0 0 12px}
+body[data-mode="present"] .withmemo .nmo-fs{gap:5px}
+body[data-mode="present"] .withmemo .nmo-f input{font-size:18px;padding:4px 9px}
+body[data-mode="present"] .withmemo .nmo-f b{font-size:17px;padding:3px 6px}
+body[data-mode="present"] .withmemo .nmo-out{font-size:16px}
+/* 요청문 만들기: 칸이 늘어서 두 줄씩 */
+body[data-mode="present"] .bld[data-kind="image"] .bf[data-k="who"],body[data-mode="present"] .bld[data-kind="image"] .bf[data-k="what"],body[data-mode="present"] .bld[data-kind="image"] .bf[data-k="style"]{grid-column:auto}

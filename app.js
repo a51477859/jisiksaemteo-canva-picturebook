@@ -598,6 +598,11 @@
   paintFs(); document.addEventListener('fullscreenchange', paintFs);
   fsBtn.addEventListener('click', function (e) { e.stopPropagation(); if (document.fullscreenElement) document.exitFullscreen(); else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen(); fsBtn.blur(); });
   if (document.documentElement.requestFullscreen) folBtn.parentNode.insertBefore(fsBtn, folBtn);
+  /* 클래스보드 바로 가기 */
+  var cbBtn = document.createElement('a');
+  cbBtn.className = 'modebtn cbbtn'; cbBtn.href = 'https://www.clboard.co.kr/student/260153'; cbBtn.target = '_blank'; cbBtn.rel = 'noopener'; cbBtn.textContent = '클래스보드';
+  cbBtn.addEventListener('click', function (e) { e.stopPropagation(); });
+  folBtn.parentNode.insertBefore(cbBtn, folBtn);
   function paintFollow() {
     folBtn.hidden = unlocked;
     folBtn.classList.toggle('on', following);
@@ -939,7 +944,7 @@
   });
   stage.addEventListener('click', function (e) {
     if (mode !== 'present') return;
-    if (e.target.closest('button,a,video,table,input,textarea,select,label,form,[contenteditable],.meter,.lv,.qz,.fc,[data-more],.pbox,.pb-full,.checks li,.tour-tabs,.bld,.tour,.tpx,.spk,.pcx,.bkf,.brk,.cht,.mk,.prc,.stuck')) return;
+    if (e.target.closest('.nmo,.nmo-full,button,a,video,table,input,textarea,select,label,form,[contenteditable],.meter,.lv,.qz,.fc,[data-more],.pbox,.pb-full,.checks li,.tour-tabs,.bld,.tour,.tpx,.spk,.pcx,.bkf,.brk,.cht,.mk,.prc,.stuck')) return;
     if (slides[idx] && slides[idx].querySelector('.bld')) return; /* 글을 쓰는 장은 화면을 눌러도 넘어가지 않아요 */
     var r = stage.getBoundingClientRect();
     (e.clientX - r.left) / r.width < 0.25 ? prev() : next();

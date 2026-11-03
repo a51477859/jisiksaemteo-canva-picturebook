@@ -7,9 +7,12 @@
   function toast(m) { if (window.KIT && KIT.toast) KIT.toast(m); }
   function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
   function copy(t) {
-    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t).then(function () { toast('복사했어요'); });
-    var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select();
-    try { document.execCommand('copy'); toast('복사했어요'); } catch (e) {} ta.remove();
+    function old() {
+      var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); toast('복사했어요'); } catch (e) { toast('복사하지 못했어요. 글을 직접 선택해 복사해 주세요.'); } ta.remove();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t).then(function () { toast('복사했어요'); }, old);
+    old();
   }
 
   /* ---------- 양옆 빈 띠: 지금 장면의 배경 그림을 깔아요 ---------- */
@@ -90,6 +93,7 @@
     { k: 'what', h: '무엇을', ph: '예) 나무 아래에서 노란 우산을 발견하고 깜짝 놀란다', chips: [] },
     { k: 'where', h: '어디서', ph: '예) 비 오는 숲길', chips: [['비 오는 숲길', '비 오는 숲길'], ['학교 앞', '비 오는 학교 앞'], ['나무 아래', '커다란 나무 아래']] },
     { k: 'mood', h: '분위기', ph: '예) 따뜻하고 포근한', chips: [['포근한', '따뜻하고 포근한 분위기'], ['두근두근', '긴장되고 궁금한 분위기'], ['신나는', '밝고 신나는 분위기']] },
+    { k: 'time', h: '시간과 날씨', ph: '예) 비 오는 저녁', chips: [['맑은 아침', '맑은 아침'], ['비 오는 저녁', '비 오는 저녁'], ['별이 많은 밤', '별이 많은 밤']] },
     { k: 'style', h: '그림체', ph: '재료 · 선 · 색 · 질감', chips: [
       ['수채화', '종이에 그린 부드러운 수채화, 가는 윤곽선, 노랑·연두 중심, 물감 번짐과 종이 결'],
       ['색연필', '색연필로 여러 번 겹쳐 칠한 그림, 가는 연필 선, 따뜻하고 소박한 색, 종이 결'],
@@ -105,13 +109,14 @@
       ['표지', '위쪽 3분의 1은 제목을 넣을 밝은 빈 공간, 인물은 아래 가운데']], pick: true },
     { k: 'cam', h: '구도', chips: [['멀리서 전신', '멀리서 본 전신 구도'], ['가까이 얼굴', '얼굴이 크게 보이는 가까운 구도'], ['위에서', '위에서 내려다본 구도']], pick: true },
   ];
-  var IMG_EX = { who: FOX, what: '나무 아래에서 달팽이가 쓰고 있는 노란 우산을 발견하고 깜짝 놀란다', where: '비 오는 숲길', mood: '따뜻하고 포근한 분위기',
+  var IMG_EX = { who: FOX, what: '나무 아래에서 달팽이가 쓰고 있는 노란 우산을 발견하고 깜짝 놀란다', where: '비 오는 숲길', mood: '따뜻하고 포근한 분위기', time: '비 오는 오후',
     style: '종이에 그린 부드러운 수채화, 가는 윤곽선, 노랑·연두 중심, 물감 번짐과 종이 결', space: '화면 아래쪽 3분의 1은 글을 넣을 수 있게 아무것도 없는 밝은 공간으로 비워 둔다', cam: '멀리서 본 전신 구도' };
   function assembleImg(v) {
     var parts = ['어린이 그림책 삽화.'];
     if (v.who || v.what) parts.push([v.who ? slot('who', v.who) : '', v.what ? slot('what', v.what) : ''].filter(Boolean).join(' ') + '.');
     if (v.where) parts.push(slot('where', v.where) + '.');
     if (v.mood) parts.push(slot('mood', v.mood) + '.');
+    if (v.time) parts.push(slot('time', v.time) + '.');
     if (v.cam) parts.push(slot('cam', v.cam) + '.');
     if (v.style) parts.push(slot('style', v.style) + '.');
     if (v.space) parts.push(slot('space', v.space) + '.');
@@ -122,8 +127,8 @@
   var META = [
     { k: 'text', h: '내 원고', ph: '표지와 장면별 문장을 붙여 넣어요', area: true },
     { k: 'who', h: '캐릭터 설명', ph: '예) ' + FOX, chips: [['여우 모루', FOX]] },
-    { k: 'style', h: '그림체', ph: '예) 부드러운 수채화', chips: IMG[4].chips },
-    { k: 'space', h: '글 자리', chips: IMG[5].chips, pick: true },
+    { k: 'style', h: '그림체', ph: '예) 부드러운 수채화', chips: IMG.filter(function (f) { return f.k === 'style'; })[0].chips },
+    { k: 'space', h: '글 자리', chips: IMG.filter(function (f) { return f.k === 'space'; })[0].chips, pick: true },
   ];
   var META_EX = { text: '표지: 잃어버린 노란 우산\n장면 1: 비 오는 아침, 모루는 노란 우산을 쓰고 학교에 갔어요.\n장면 2: 집에 가는 길, 모루는 깜짝 놀랐어요. “내 노란 우산이 어디 갔지?”',
     who: FOX, style: '종이에 그린 부드러운 수채화, 가는 윤곽선, 노랑·연두 중심, 물감 번짐과 종이 결', space: '화면 아래쪽 3분의 1은 글을 넣을 수 있게 아무것도 없는 밝은 공간으로 비워 둔다' };
@@ -138,6 +143,53 @@
   function slot(k, t) { return '\u0001' + k + '\u0002' + t + '\u0003'; }
   function toHtml(s) { return esc(s).replace(/\u0001(\w+)\u0002([\s\S]*?)\u0003/g, '<mark class="bk-$1">$2</mark>').replace(/\n/g, '<br>'); }
   function toText(s) { return s.replace(/\u0001\w+\u0002([\s\S]*?)\u0003/g, '$1'); }
+
+  /* 실습 2 메모장: 적는 즉시 이 브라우저에 저장, 복사할 때는 이름표를 뺀 요청문으로 */
+  var NOTE = [
+    { k: 'who', h: '누가', ph: '예) 둥근 안경을 쓴 작은 고슴도치가' },
+    { k: 'what', h: '무엇을', ph: '예) 커다란 그림책을 펼쳐 읽는다' },
+    { k: 'where', h: '어디서', ph: '예) 아늑한 작은 도서관' },
+    { k: 'mood', h: '분위기', ph: '예) 따뜻하고 포근한 분위기' },
+    { k: 'time', h: '시간과 날씨', ph: '예) 비 오는 저녁' },
+    { k: 'style', h: '그림체', ph: '예) 종이에 그린 부드러운 수채화' },
+    { k: 'cam', h: '구도', ph: '예) 멀리서 본 전신 구도' },
+    { k: 'space', h: '글 자리', ph: '예) 화면 아래쪽 3분의 1은 글을 넣을 빈 공간으로 비워 둔다' },
+  ];
+  var noteV = {};
+  try { noteV = JSON.parse(store('v3-note') || '{}') || {}; } catch (e) { noteV = {}; }
+  function noteText() { return toText(assembleImg(noteV)); }
+  function noteField(f) { return '<label class="nmo-f" data-k="' + f.k + '"><b class="bk-' + f.k + '">' + f.h + '</b><input type="text" data-note="' + f.k + '" placeholder="' + esc(f.ph) + '" value="' + esc(noteV[f.k] || '') + '"></label>'; }
+  function noteAll() { return '<div class="nmo-fs">' + NOTE.map(noteField).join('') + '</div><p class="nmo-out-h">완성된 요청문</p><p class="nmo-out"></p><div class="nmo-b"><button type="button" class="nmo-copy">요청문 복사</button><button type="button" class="nmo-clr">모두 지우기</button></div>'; }
+  function notePaint() {
+    $$('[data-note]').forEach(function (i) { if (document.activeElement !== i) i.value = noteV[i.dataset.note] || ''; });
+    $$('.nmo-out').forEach(function (o) { o.textContent = noteText(); });
+  }
+  function noteOpen() {
+    var ov = document.createElement('div'); ov.className = 'nmo-ov';
+    ov.innerHTML = '<div class="nmo-box" role="dialog" aria-label="메모장"><button type="button" class="nmo-x" aria-label="닫기">×</button><h3>메모장</h3>' + noteAll() + '</div>';
+    ov.addEventListener('click', function (e) { if (e.target === ov || e.target.closest('.nmo-x')) ov.remove(); });
+    ov.addEventListener('keydown', function (e) { e.stopPropagation(); if (e.key === 'Escape') ov.remove(); });
+    document.body.appendChild(ov); notePaint();
+  }
+  $$('.nmo').forEach(function (el) {
+    var keys = el.dataset.keys.split(',');
+    el.innerHTML = '<span class="nmo-n">메모장 ' + esc(el.dataset.n) + '/6</span><div class="nmo-row">' + keys.map(function (k) { return noteField(NOTE.filter(function (f) { return f.k === k; })[0]); }).join('') + '</div><button type="button" class="nmo-all">전체 보기</button>';
+  });
+  $$('.nmo-full').forEach(function (el) { el.innerHTML = '<h3>메모장</h3>' + noteAll(); });
+  document.addEventListener('input', function (e) {
+    var k = e.target.dataset && e.target.dataset.note; if (!k) return;
+    noteV[k] = e.target.value.trim(); store('v3-note', JSON.stringify(noteV)); notePaint();
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('.nmo-all')) { e.stopPropagation(); noteOpen(); return; }
+    if (e.target.closest('.nmo-copy')) { e.stopPropagation(); copy(noteText()); return; }
+    var c = e.target.closest('.nmo-clr'); if (!c) return;
+    e.stopPropagation();
+    if (c.dataset.sure) { noteV = {}; store('v3-note', '{}'); notePaint(); delete c.dataset.sure; c.textContent = '모두 지우기'; return; }
+    c.dataset.sure = '1'; c.textContent = '정말 지울까요?';
+    setTimeout(function () { delete c.dataset.sure; c.textContent = '모두 지우기'; }, 3000);
+  });
+  notePaint();
 
   $$('.bld').forEach(function (el) {
     var meta = el.dataset.kind === 'meta', F = meta ? META : IMG, EX = meta ? META_EX : IMG_EX, v = {};
