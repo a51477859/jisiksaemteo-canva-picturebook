@@ -1,0 +1,320 @@
+/* ================================================================
+   테마 · T셀파 그림책 (T쌤라이브 Canva 강의)
+   T셀파 파랑 #007EFF 를 주 색으로, 로고의 주황을 보조 색으로, 바탕은 그림책 종이
+   덱 style.css 의 변수(--coral 등)를 그대로 덮어써서 모든 장에 한 번에 적용한다
+   ================================================================ */
+:root{
+  --cream:#F7F5EF;--cream2:#ECEEF3;--ink:#1F2733;--coral:#007EFF;--purple:#FF8A1F;--mute:#5E6775;--yel:#FFD54A;
+  --kit-accent:#007EFF;--kit-ink:#1F2733;--kit-paper:#F7F5EF;--kit-pens:#007EFF,#1F2733,#FF8A1F,#2FBF71
+}
+body{background:#F7F5EF;
+  background-image:radial-gradient(rgba(31,39,51,.035) 1px,transparent 1px);background-size:22px 22px}
+.topbar{background:rgba(247,245,239,.94)}
+
+/* 왼쪽 위 브랜드 (작게) */
+.brandbar{position:fixed;left:18px;top:12px;z-index:90;display:flex;align-items:center;gap:10px;padding:6px 12px 6px 8px;border-radius:99px;
+  background:rgba(255,255,255,.86);border:1px solid rgba(31,39,51,.08);text-decoration:none;color:var(--ink);box-shadow:0 2px 10px rgba(31,39,51,.06)}
+.brandbar img{height:22px;width:auto;display:block}
+.brandbar span{font-weight:800;font-size:14px;color:#007EFF;letter-spacing:-.01em;padding-left:10px;border-left:1px solid rgba(31,39,51,.15)}
+body[data-mode="read"] .brandbar{position:absolute}
+@media (max-width:820px){.brandbar{left:10px;top:8px;padding:4px 10px 4px 6px}.brandbar img{height:16px}.brandbar span{font-size:12px}}
+
+/* 장 머리: 챕터 이름은 파랑, 손그림 밑줄은 주황 */
+.chap{color:#007EFF}
+.title .ul path{stroke:#FF8A1F}
+.todo b{background:#007EFF}
+
+/* 표지 */
+.s-book{display:flex;align-items:center;gap:60px}
+.s-book .cover-text{flex:1}
+.s-book .eyebrow .ey-pill{background:#007EFF;color:#fff}
+.s-book .ctitle .l2{color:#007EFF}
+.s-book .hero-lead{color:var(--ink)}
+.s-book .mission4{list-style:none;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:.5em 1.2em;margin-top:1.2em;font-weight:800}
+.s-book .mission4 b{display:inline-grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#FF8A1F;color:#fff;margin-right:.45em;font-size:.85em}
+.bookcover{margin:0;flex:0 0 46%;position:relative;transform:rotate(1.2deg)}
+.bookcover img{display:block;width:100%;border-radius:10px 22px 22px 10px;border:6px solid #fff;
+  box-shadow:-14px 0 0 -6px #007EFF inset,0 24px 48px -18px rgba(31,39,51,.45),0 6px 14px rgba(31,39,51,.12)}
+.bookcover figcaption{position:absolute;left:0;right:0;top:9%;text-align:center;pointer-events:none}
+.bookcover figcaption b{display:inline-block;font-weight:900;font-size:1.5em;color:#1F2733;background:rgba(255,255,255,.82);padding:.15em .6em;border-radius:12px;letter-spacing:-.02em}
+.bookcover figcaption span{display:block;margin-top:.4em;font-size:.62em;font-weight:700;color:#1F2733;opacity:.75}
+body[data-mode="present"] .s-book{padding:120px 100px 120px 130px}
+body[data-mode="present"] .s-book .eyebrow{font-size:30px}
+body[data-mode="present"] .s-book .ctitle{font-size:124px;line-height:1.05}
+body[data-mode="present"] .s-book .hero-lead{font-size:34px}
+body[data-mode="present"] .s-book .mission4{font-size:30px;margin-top:44px}
+body[data-mode="present"] .bookcover figcaption{font-size:34px}
+@media (max-width:820px){.s-book{flex-direction:column;gap:24px}.bookcover{flex:none;width:100%}}
+
+/* 그림 모음 (완성본 6쪽, 그림체 예시) */
+.gal{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:.7em}
+.gal.n2{grid-template-columns:1fr 1fr}.gal.n4{grid-template-columns:1fr 1fr}
+.gal figure{margin:0;background:#fff;border-radius:14px;padding:.35em;box-shadow:0 6px 18px -10px rgba(31,39,51,.35);border:1px solid rgba(31,39,51,.06)}
+.gal img{display:block;width:100%;aspect-ratio:1390/780;object-fit:cover;border-radius:10px}
+.gal figcaption{font-size:.56em;line-height:1.35;padding:.45em .3em .2em;color:var(--ink)}
+.gal figcaption b{display:inline-block;background:#007EFF;color:#fff;border-radius:6px;padding:0 .4em;margin-right:.4em;font-size:.9em}
+.gal-note{font-size:.56em;color:var(--mute);margin:.6em 0 0}
+.active .gal li,.in .gal li{animation:itIn .5s both;animation-delay:calc(.3s + var(--k,0)*.07s)}
+body.lite .gal li{animation:none}
+
+/* 오른쪽 큰 그림 */
+.capw.withshot .shotimg img{border-radius:12px}
+.capw.withshot.wide{grid-template-columns:.8fr 1.2fr}
+
+/* 꿀팁 표시 */
+.tipc.k-tip b{background:#FF8A1F}
+
+/* 발표 모드: 그림책 아래 글 자리(빈 크림색)는 잘라 보이고, 아래 장 이동 막대와 겹치지 않게 */
+body[data-mode="present"] .gal{max-width:1500px}
+body[data-mode="present"] .gal img{aspect-ratio:1390/610;object-position:top}
+body[data-mode="present"] .gal.n4{max-width:1240px}
+/* 장 이름이 11개라 간격을 줄이고 줄바꿈을 막는다 */
+body[data-mode="present"] .progress{gap:26px}
+body[data-mode="present"] .progress button{font-size:21px;letter-spacing:.02em;white-space:nowrap}
+.progress .count{white-space:nowrap}
+
+/* 단계 카드 + 화면 캡처: 카드는 세로로 쌓고 캡처를 크게 */
+.withshot .stp{grid-template-columns:1fr;gap:.7em}
+.withshot .stp .it{min-height:0;padding:.6em .9em .65em 2.7em}
+.withshot .stp .ix{left:.6em;top:.65em}
+.withshot .stp .it + .it::before{display:none}
+.withshot .stp .it > p br{display:none}
+body[data-mode="present"] .withshot .shotimg img{max-height:560px}
+
+/* 효과 끔: 카드 뒤집기·통계도 바로 보이게 */
+body.lite .fc,body.lite .sts li{animation:none}
+/* 그림 3장 한 줄은 크게 */
+body[data-mode="present"] .gal.n3{max-width:none;gap:1em}
+body[data-mode="present"] .gal.n3 img{aspect-ratio:1390/700}
+body[data-mode="present"] .gal.n3 figcaption{font-size:.62em}
+
+/* ---- 강사 따라가기 단추 (참가자에게만) ---- */
+.folbtn{display:inline-flex;align-items:center;gap:6px;margin-right:6px;background:#fff;color:var(--ink)}
+.folbtn[hidden]{display:none}
+.folbtn i{width:9px;height:9px;border-radius:50%;background:#B9C0CB}
+.folbtn.on{background:#007EFF;border-color:#007EFF;color:#fff}
+.folbtn.on i{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.35);animation:folPulse 1.6s infinite}
+.folbtn.on.nolive{background:#fff;color:#007EFF}
+.folbtn.on.nolive i{background:#007EFF;animation:none}
+@keyframes folPulse{50%{box-shadow:0 0 0 6px rgba(255,255,255,0)}}
+/* 참가자 화면에서는 상단 단추를 늘 또렷하게 */
+body.locked[data-mode="present"] .modebtn{opacity:1}
+body.locked[data-mode="present"] .modebtn:not(.folbtn){opacity:.55}
+
+/* ---- 실습 체크리스트: 메모지 + 마스킹테이프 + 도장 ---- */
+.prc-l{position:relative;background:#FFFBEA;border-radius:6px;padding:1.1em 1.3em 1em;box-shadow:0 10px 24px -14px rgba(31,39,51,.45),0 1px 0 rgba(31,39,51,.06);
+  background-image:repeating-linear-gradient(transparent 0 2.05em,rgba(0,126,255,.10) 2.05em calc(2.05em + 1px));transform:rotate(-.4deg)}
+.prc-l::before{content:"";position:absolute;left:50%;top:-.55em;width:5.5em;height:1.2em;transform:translateX(-50%) rotate(-2deg);background:rgba(255,213,74,.75);
+  box-shadow:0 1px 2px rgba(31,39,51,.12);clip-path:polygon(3% 0,97% 4%,100% 50%,96% 100%,2% 96%,0 50%)}
+.prc .checks li{cursor:pointer;user-select:none;border-radius:.4em;transition:background .15s}
+.prc .checks li:hover{background:rgba(0,126,255,.06)}
+.prc .checks li.ok{color:#5E6775}
+.prc .checks li.ok::before{background:#007EFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3.2 3L13 4.5' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/80% no-repeat;border-color:#007EFF}
+.ck-stamp{position:absolute;right:.8em;top:.4em;margin:0;pointer-events:none;opacity:0;transform:scale(2.2) rotate(-14deg)}
+.ck-stamp b{display:inline-block;border:.16em solid #E8452C;color:#E8452C;border-radius:50%;width:4.6em;height:4.6em;display:grid;place-items:center;
+  font-size:.78em;font-weight:900;line-height:1.1;text-align:center;padding:.4em;background:rgba(255,255,255,.6)}
+.all-ok .ck-stamp{opacity:.92;transform:scale(1) rotate(-14deg);transition:transform .35s cubic-bezier(.2,1.6,.4,1),opacity .2s}
+/* 강사 화면: 완료 인원 */
+.ck-meter{display:none;flex-direction:column;align-items:center;gap:.15em;background:#fff;border:2.5px solid #007EFF;border-radius:.8em;padding:.5em .9em .55em;min-width:7em}
+body:not(.locked) .ck-meter{display:flex}
+.ck-meter p{margin:0;font-weight:900;color:#007EFF;display:flex;align-items:baseline;gap:.15em}
+.ck-meter p b{font-size:2.1em;line-height:1}
+.ck-meter p span{font-size:.75em}
+.ck-meter small{font-size:.6em;color:var(--mute)}
+.ck-reset{font-size:.5em;color:var(--mute);text-decoration:underline;margin-top:.1em}
+
+/* ---- 따라 하기 둘러보기: 책갈피 탭 + 브라우저 창 ---- */
+.tour{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.32fr);gap:1.6em;align-items:center}
+.tour-tabs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.55em;counter-reset:none}
+.tt{position:relative;display:grid;grid-template-columns:auto 1fr;column-gap:.7em;align-items:center;cursor:pointer;
+  background:#fff;border:2px solid rgba(31,39,51,.14);border-left:0;border-radius:0 1em 1em 0;padding:.55em 1em .6em .9em;margin-left:.6em;
+  transition:transform .3s cubic-bezier(.2,.8,.2,1),background .2s,border-color .2s,box-shadow .3s}
+.tt::before{content:"";position:absolute;left:-.6em;top:-2px;bottom:-2px;width:.6em;border-radius:.35em 0 0 .35em;background:#CBD3DE;transition:background .2s}
+.tt .ix{grid-row:span 2;width:1.7em;height:1.7em;border-radius:50%;background:#EEF2F7;color:#5E6775;font-style:normal;font-weight:900;font-size:.82em;display:grid;place-items:center;transition:background .2s,color .2s}
+.tt b{font-size:.95em;line-height:1.3}
+.tt p{grid-column:2;margin:.1em 0 0;font-size:.68em;color:var(--mute);line-height:1.4}
+.tt u{position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:0 0 1em 0;background:#007EFF;transform-origin:left;transform:scaleX(0)}
+.tt:hover{border-color:rgba(0,126,255,.45)}
+.tt.past .ix{background:#D6E8FF;color:#007EFF}
+.tt.cur{background:#EAF3FF;border-color:#007EFF;transform:translateX(.7em);box-shadow:0 10px 22px -14px rgba(0,126,255,.8)}
+.tt.cur::before{background:#FF8A1F}
+.tt.cur .ix{background:#007EFF;color:#fff}
+.tour.auto .tt.cur u{animation:ttBar 4.5s linear forwards}
+@keyframes ttBar{to{transform:scaleX(1)}}
+.tour-win{margin:0;display:flex;flex-direction:column;gap:.4em}
+.tw-bar{display:flex;align-items:center;gap:.4em;background:#E9EDF3;border:2px solid #1F2733;border-bottom:0;border-radius:.7em .7em 0 0;padding:.45em .7em}
+.tw-bar i{width:.6em;height:.6em;border-radius:50%;background:#FF6159}.tw-bar i:nth-child(2){background:#FFBD2E}.tw-bar i:nth-child(3){background:#28C941}
+.tw-url{flex:1;margin-left:.6em;background:#fff;border-radius:99px;padding:.15em .9em;font-size:.55em;font-weight:700;color:#5E6775;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tw-url::before{content:"🔒 ";font-size:.9em}
+.tw-view{display:grid;place-items:center;border:2px solid #1F2733;border-top:0;border-radius:0 0 .7em .7em;overflow:hidden;background:#F2F3F6;box-shadow:.45em .45em 0 rgba(31,39,51,.12);min-height:11em}
+.tw-shot{grid-area:1/1;position:relative;opacity:0;transition:opacity .35s;width:fit-content;max-width:100%}
+.tw-shot.on{opacity:1}
+.tw-shot img{display:block;width:auto;max-width:100%;height:auto;max-height:15.5em;border:0;border-radius:0;box-shadow:none}
+.tw-box{position:absolute;border:3px solid #FF3B30;border-radius:.4em;box-shadow:0 0 0 3px rgba(255,255,255,.9),0 4px 14px rgba(255,59,48,.35);opacity:0;
+  transition:left .45s cubic-bezier(.2,.8,.2,1),top .45s cubic-bezier(.2,.8,.2,1),width .45s,height .45s,opacity .25s}
+.tw-box.on{opacity:1;animation:twPing 1.6s .5s infinite}
+@keyframes twPing{50%{border-color:#FF8A1F}}
+.tour-win figcaption{font-size:.5em;color:var(--mute);text-align:right}
+body[data-mode="present"] .tw-view{height:560px}
+body[data-mode="present"] .tw-shot img{max-height:556px}
+body.lite .tt,body.lite .tw-shot,body.lite .tw-box{transition:none}
+body.lite .tw-box.on{animation:none}
+@media (max-width:820px){.tour{grid-template-columns:1fr}.tt.cur{transform:none}}
+
+/* ================= 그림책 카드 모양 =================
+   낱장 카드(접힌 귀퉁이) · 기준 카드(테이프) · 비교(펼친 책) · 팁(모루 말풍선) */
+.it{border:0;border-radius:.35em .35em .35em .35em;background:#FFFDF7;
+  box-shadow:0 1px 0 rgba(31,39,51,.08),0 12px 22px -16px rgba(31,39,51,.55),inset 0 0 0 1.5px rgba(31,39,51,.10)}
+/* 낱장 카드: 오른쪽 위 귀퉁이가 접힌 종이, 번호는 파란 색인 */
+.pts .it,.stp:not(.vert) .it,.flw .it{padding-top:1em}
+.pts .it::after,.stp:not(.vert) .it::after,.flw .it::after{content:"";position:absolute;right:0;top:0;width:1.3em;height:1.3em;
+  background:linear-gradient(225deg,#F7F5EF 50%,#E4DCC8 50%);border-radius:0 .35em 0 .3em;box-shadow:-2px 2px 3px rgba(31,39,51,.10)}
+.pts .it:nth-child(odd){transform:rotate(-.6deg)}.pts .it:nth-child(even){transform:rotate(.5deg)}
+.pts .it .ix{display:inline-block;background:#007EFF;color:#fff;border-radius:.3em;padding:.08em .5em;letter-spacing:.04em}
+.pts .it > b{color:#1F2733}
+/* 단계(브라우저 없는 장): 번호 원은 주황, 사이 화살표 대신 점선 발자국 */
+.stp:not(.vert) .ix,.flw .ix{background:#FF8A1F;box-shadow:0 0 0 .2em #FFFDF7}
+.stp:not(.vert) .it + .it::before,.flw .it + .it::before{border:0;width:1em;height:.25em;left:-1.2em;transform:translateY(-50%);
+  background:radial-gradient(circle,#007EFF 45%,transparent 50%) 0 0/.33em .25em repeat-x}
+/* 기준 체크(14·27·40장 같은 장): 테이프 붙인 색인 카드 */
+.ckl .it{background:#fff;padding-top:.85em}
+.ckl .it::before{border-color:#007EFF;border-radius:50%;background:#EAF3FF}
+.ckl .it::after{border-color:#007EFF}
+.ckl:not(.mini) .it{border-top:.35em solid #FFD54A}
+/* 비교: 펼친 그림책 두 쪽 */
+.ba{gap:0;grid-template-columns:1fr 0 1fr;position:relative}
+.ba-p{border:0;border-radius:.4em 0 0 .4em;background:#FFFDF7;box-shadow:inset -1.2em 0 1.2em -1.2em rgba(31,39,51,.25),0 14px 26px -18px rgba(31,39,51,.6);padding:1em 1.6em 1.1em 1.2em}
+.ba-a{border-radius:0 .4em .4em 0;box-shadow:inset 1.2em 0 1.2em -1.2em rgba(31,39,51,.25),0 14px 26px -18px rgba(31,39,51,.6);padding:1em 1.2em 1.1em 1.6em}
+.ba-b{background:#F4F1EA;color:#5E6775}
+.ba-arr{position:relative;z-index:2;width:0;height:auto;border:0;transform:none!important;align-self:stretch}
+.ba-arr::before{content:"→";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:1.6em;height:1.6em;border-radius:50%;
+  background:#007EFF;color:#fff;display:grid;place-items:center;font-style:normal;font-weight:900;font-size:.9em;box-shadow:0 0 0 .25em #F7F5EF;border:0;rotate:0deg;margin:0}
+.ba-arr::after{display:none}
+/* 팁: 모루 말풍선 */
+.tipc{position:relative;border:0;background:#fff;border-radius:1.1em;padding:.55em 1.1em .55em 3.6em;min-height:2.9em;
+  box-shadow:0 10px 22px -16px rgba(31,39,51,.6),inset 0 0 0 2px rgba(0,126,255,.25)}
+.tipc::before{content:"";position:absolute;left:-.4em;bottom:-.25em;width:3.6em;height:3.6em;background:url(fox_tip.png) center/contain no-repeat}
+.tipc.k-warn::before{background-image:url(fox_warn.png)}
+.tipc.k-check::before{background-image:url(fox_ok.png)}
+.tipc.k-warn{box-shadow:0 10px 22px -16px rgba(31,39,51,.6),inset 0 0 0 2px rgba(232,69,44,.35)}
+.tipc b,.tipc.k-tip b{background:#FF8A1F}
+.tipc.k-warn b{background:#E8452C}
+/* 표: 머리는 T셀파 파랑 */
+.tbl thead th{background:#007EFF}
+.tbl{box-shadow:0 12px 24px -18px rgba(31,39,51,.6)}
+/* 뒤집기 카드 앞면도 종이처럼 */
+.fc-f{background:#FFFDF7!important;border-color:rgba(31,39,51,.18)!important}
+.fc-b{background:#007EFF!important;color:#fff!important}
+
+/* ---- 고르는 눈: 기준마다 ✗/○ 예시 한 쌍 ---- */
+.pkx{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1.1em}
+.pkx > li{background:#FFFDF7;border-radius:.5em;padding:.8em .8em .7em;box-shadow:0 12px 22px -16px rgba(31,39,51,.55),inset 0 0 0 1.5px rgba(31,39,51,.10);border-top:.35em solid #FFD54A;animation:itIn .5s both;animation-delay:calc(.3s + var(--k,0)*.12s)}
+body.lite .pkx > li{animation:none}
+.pk-h{margin:0 0 .55em;display:flex;flex-direction:column;gap:.1em}
+.pk-h b{font-size:1em;font-weight:900}
+.pk-h span{font-size:.62em;color:var(--mute)}
+.pk-pair{display:grid;grid-template-columns:1fr 1fr;gap:.5em}
+.pk-pair figure{margin:0;position:relative}
+.pk-pair img{display:block;width:100%;border-radius:.35em;border:2px solid transparent}
+.pk-x img{filter:saturate(.75);border-color:#F2B8AE}
+.pk-o img{border-color:#007EFF}
+.pk-pair figcaption{font-size:.48em;line-height:1.35;margin-top:.35em;display:flex;gap:.35em;align-items:flex-start;color:var(--ink)}
+.pk-pair figcaption i{flex:none;font-style:normal;font-weight:900;width:1.5em;height:1.5em;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:1.05em}
+.pk-x figcaption i{background:#E8452C}
+.pk-o figcaption i{background:#007EFF}
+@media (max-width:820px){.pkx{grid-template-columns:1fr}}
+body[data-mode="present"] .pkx{font-size:1.15em}
+body[data-mode="present"] .pkx .pk-pair figcaption{font-size:.56em}
+.withshot .flw{grid-template-columns:1fr;gap:.6em}
+.withshot .flw .it{min-height:0;padding:.55em .9em .6em 2.7em}
+.withshot .flw .ix{left:.6em;top:.6em}
+.withshot .flw .it + .it::before{display:none}
+.withshot .tbl{font-size:.86em}
+.gal img[src*="ex_"]{aspect-ratio:1400/990}
+body[data-mode="present"] .gal img[src*="ex_"]{aspect-ratio:1400/990;object-fit:contain}
+body[data-mode="present"] .gal.n2:has(img[src*="ex_"]){max-width:1250px;margin:0 auto}
+
+/* 둘러보기: 단계 글자를 크게 (Zoom 화면 공유에서도 읽히게) */
+.tour{grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr)}
+.tour-tabs{gap:.7em}
+.tt{padding:.75em 1.1em .8em 1em}
+.tt b{font-size:1.18em}
+.tt p{font-size:.82em;margin-top:.2em}
+.tt .ix{font-size:.95em;width:1.8em;height:1.8em}
+/* 발표 화면 둘러보기: 창 크기 고정, 캡처는 누를 곳을 따라 움직인다 */
+.tw-view.fr{display:block;position:relative}
+.tw-view.fr .tw-shot{position:absolute;max-width:none;transition:opacity .35s,left .5s cubic-bezier(.2,.8,.2,1),top .5s cubic-bezier(.2,.8,.2,1),width .5s cubic-bezier(.2,.8,.2,1),height .5s cubic-bezier(.2,.8,.2,1)}
+.tw-view.fr .tw-shot img{width:100%;height:100%;max-width:none;max-height:none}
+body.lite .tw-view.fr .tw-shot{transition:none}
+.tour.n4 .tour-tabs{gap:.5em}.tour.n4 .tt{padding-top:.6em;padding-bottom:.62em}
+
+/* ---- 책 지도: 6쪽 중 어디까지 했나 ---- */
+.bmap{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.7em;counter-reset:none}
+.bm{background:#FFFDF7;border-radius:.5em;padding:.45em .45em .55em;box-shadow:0 10px 20px -16px rgba(31,39,51,.55),inset 0 0 0 1.5px rgba(31,39,51,.10);animation:itIn .5s both;animation-delay:calc(.3s + var(--k,0)*.08s)}
+body.lite .bm{animation:none}
+.bm-img{margin:0;position:relative;border-radius:.35em;overflow:hidden;aspect-ratio:1400/990;background:#fff}
+.bm-img img{display:block;width:100%;height:100%;object-fit:cover}
+.bm-img.part{outline:3px dashed #FF8A1F;outline-offset:-3px}
+.bm-img.part img{opacity:.38;filter:grayscale(.5)}
+.bm-ok{position:absolute;right:.25em;top:.25em;width:1.4em;height:1.4em;border-radius:50%;background:#2F9E6A;color:#fff;font-style:normal;font-weight:900;display:grid;place-items:center;font-size:.8em}
+.bm-h{margin:.45em 0 .2em;font-size:.78em;font-weight:900;display:flex;gap:.35em;align-items:baseline}
+.bm-h b{background:#007EFF;color:#fff;border-radius:.3em;padding:0 .35em;font-size:.9em}
+.bm-s{margin:0;display:flex;flex-wrap:wrap;gap:.25em;font-size:.6em;font-weight:800}
+.bm-s span{border-radius:99px;padding:.05em .55em}
+.bm-s .y{background:#E3F4EA;color:#1F7A4D}
+.bm-s .n{background:#FFF0E0;color:#B5531A;outline:1.5px dashed #FF8A1F}
+.bm small{display:block;margin-top:.3em;font-size:.52em;color:var(--mute)}
+@media (max-width:820px){.bmap{grid-template-columns:repeat(3,minmax(0,1fr))}}
+body[data-mode="present"] .bmap{grid-template-columns:repeat(3,minmax(0,1fr));gap:.6em 1em;max-width:1500px}
+body[data-mode="present"] .bm{display:grid;grid-template-columns:11em 1fr;column-gap:.7em;align-items:center;padding:.45em}
+body[data-mode="present"] .bm-img{grid-row:span 3}
+body[data-mode="present"] .bm-h{font-size:.95em;margin:0 0 .25em}
+body[data-mode="present"] .bm-s{font-size:.72em}
+body[data-mode="present"] .bm small{font-size:.62em}
+.tour.n5 .tour-tabs,.tour.n6 .tour-tabs{gap:.4em}.tour.n5 .tt,.tour.n6 .tt{padding-top:.45em;padding-bottom:.5em}.tour.n6 .tt b{font-size:1.02em}.tour.n6 .tt p{font-size:.72em}
+/* 주소 줄: 눌러서 열기 · 복사 */
+.linkbar{display:flex;align-items:center;gap:.6em;flex-wrap:wrap;margin:.4em 0 0;font-size:.7em}
+.linkbar a{font-weight:800;color:#007EFF;background:#EAF3FF;border:1.5px solid #B9D8FF;border-radius:.5em;padding:.25em .7em;text-decoration:none;word-break:break-all}
+.linkbar a:hover{text-decoration:underline}
+.lk-cp{font:inherit;font-weight:800;color:#fff;background:#007EFF;border:0;border-radius:.5em;padding:.3em .9em;cursor:pointer}
+.lk-cp:hover{background:#0068d6}
+.lk-h{font-size:.82em;color:var(--mute)}
+
+/* 숙련자 꿀팁: 보라 꼬리표 */
+.tipc.k-pro{box-shadow:0 10px 22px -16px rgba(31,39,51,.6),inset 0 0 0 2px rgba(107,78,255,.35)}
+.tipc.k-pro b{background:#6B4EFF}
+.tipc.k-pro::before{background-image:url(fox_ok.png)}
+/* 수업 사례: 학생 책 쪽 전체(글까지) 보이기 · 카드 글 줄바꿈 */
+body[data-mode="present"] .gal.full{max-width:1240px}
+body[data-mode="present"] .gal.full img,.gal.full img{aspect-ratio:1280/904;object-fit:contain;background:#fff}
+
+/* ===== v3 표지: 그림책에서 결말 23장이 퍼져요 ===== */
+.s-ends{display:flex;align-items:center;gap:30px;background:linear-gradient(to bottom,rgba(246,243,236,0) 78%,rgba(246,243,236,.92) 92%),url(v3/bg_intro.jpg) center/cover no-repeat}
+.s-ends .cover-text{flex:0 0 44%;position:relative;z-index:2}
+.s-ends .eyebrow .ey-pill{background:#007EFF;color:#fff}
+.s-ends .ctitle .l2{color:#007EFF}
+.s-ends .hero-lead{color:var(--ink)}
+.s-ends .byline{display:inline-flex;align-items:baseline;gap:.5em;margin-top:1.4em;padding:.35em .9em;border-radius:999px;background:rgba(255,255,255,.78);box-shadow:0 6px 18px -10px rgba(31,39,51,.35);font-weight:700}
+.s-ends .byline span{color:#5b6472}.s-ends .byline b{font-weight:900;color:#1F2733}
+.ends-stage{position:relative;flex:1;align-self:stretch;min-height:560px}
+.ends-book{position:absolute;left:50%;top:66%;width:56%;transform:translate(-50%,-50%);z-index:3;filter:drop-shadow(0 18px 24px rgba(60,50,20,.18));animation:bookIn .9s cubic-bezier(.2,.8,.2,1) .3s both, bookBob 6s ease-in-out 1.4s infinite}
+.ends-stage .end{position:absolute;left:calc(50% + var(--x));top:calc(66% + var(--y));width:15%;aspect-ratio:3/2;transform:translate(-50%,-50%) rotate(var(--r));z-index:2;
+  animation:endOut 1s cubic-bezier(.2,.9,.25,1.15) var(--d) both, endFloat var(--f) ease-in-out calc(var(--d) + 1s) infinite}
+.ends-stage .end img{display:block;width:100%;height:100%;object-fit:cover;border-radius:8px;border:4px solid #fff;box-shadow:0 10px 18px -10px rgba(31,39,51,.45)}
+.ends-stage .end.back{width:11.5%;z-index:1;opacity:.82;filter:saturate(.85)}
+.ends-count{position:absolute;right:4%;bottom:3%;z-index:4;font-weight:800;color:#1F2733;background:rgba(255,255,255,.85);border-radius:999px;padding:.2em .8em;animation:cntIn .6s ease 2.9s both}
+.ends-count b{color:#FF8A1F;font-size:1.5em;margin-right:.12em}
+@keyframes bookIn{from{opacity:0;transform:translate(-50%,-40%) scale(.85)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes bookBob{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,-52%)}}
+@keyframes endOut{from{opacity:0;left:50%;top:66%;transform:translate(-50%,-50%) rotate(0) scale(.2)}to{opacity:1}}
+@keyframes endFloat{0%,100%{translate:0 0}50%{translate:0 -8px}}
+@keyframes cntIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+body.lite .ends-book,body.lite .ends-stage .end,body.lite .ends-count{animation:none}
+@media (prefers-reduced-motion:reduce){.ends-book,.ends-stage .end,.ends-count{animation:none}}
+body[data-mode="present"] .s-ends{padding:110px 70px 110px 130px}
+body[data-mode="present"] .s-ends .eyebrow{font-size:28px}
+body[data-mode="present"] .s-ends .ctitle{font-size:112px;line-height:1.08}
+body[data-mode="present"] .s-ends .hero-lead{font-size:34px}
+body[data-mode="present"] .s-ends .byline{font-size:30px}
+body[data-mode="present"] .ends-count{font-size:28px}
+@media (max-width:820px){.s-ends{flex-direction:column}.s-ends .cover-text{flex:none}.ends-stage{width:100%;min-height:360px}}

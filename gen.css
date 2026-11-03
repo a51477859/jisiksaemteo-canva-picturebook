@@ -1,0 +1,189 @@
+/* ================================================================
+   생성 장면(.g) 공통 틀: 머리(장 머리·제목) → 본문(화면 문구) → 바닥(요청문·지금 할 일)
+   발표 모드 1em = 32px, 무대 1920×1080, 안쪽 1660×844
+   ================================================================ */
+.g .head{position:relative;padding-right:5.5em}
+.g .chap{display:flex;align-items:center;gap:.6em;flex-wrap:wrap}
+.g .chap .no{font-variant-numeric:tabular-nums;opacity:.75}
+.g .title{max-width:21em;text-wrap-style:balance}
+.optb{display:inline-block;font-size:.7em;font-weight:900;letter-spacing:.02em;padding:.15em .7em;border-radius:99px;border:2px dashed currentColor;color:var(--mute);vertical-align:.1em}
+.gicon{position:absolute;right:0;top:-.2em;width:4.6em;height:4.6em;object-fit:contain;mix-blend-mode:multiply;pointer-events:none;transform:rotate(6deg)}
+.gbody{margin-top:1.1em}
+.gfoot{margin-top:1.2em;display:flex;flex-direction:column;gap:.55em}
+.todo{display:flex;gap:.75em;align-items:center;font-size:1.02em;line-height:1.35;background:#fff;border:2.5px solid var(--ink);border-radius:.6em;padding:.5em .9em .5em .55em}
+.todo > b{flex:none;background:var(--ink);color:var(--cream);border-radius:99px;padding:.18em .8em;font-size:.78em;letter-spacing:.06em}
+.todo > span{flex:1}
+.todo > i{flex:none;font-style:normal;font-size:.78em;color:var(--mute);border:2px dashed rgba(22,20,26,.3);border-radius:99px;padding:.12em .7em;font-variant-numeric:tabular-nums}
+
+/* 화면 문구: 크게 한 줄 */
+.big{font-weight:900;letter-spacing:-.025em;line-height:1.22;font-size:2.3em;text-wrap-style:balance}
+.big.m{font-size:1.9em}.big.l{font-size:1.55em}
+.big em{font-style:normal;color:var(--coral)}
+
+/* 흐름: A → B → C */
+.flow{display:flex;align-items:stretch;gap:1.6em;counter-reset:f}
+.flow li{position:relative;flex:1;background:#fff;border:2.5px solid var(--ink);border-radius:.7em;padding:.8em .9em .9em;font-size:1.15em;font-weight:900;line-height:1.3;display:flex;flex-direction:column;gap:.35em;counter-increment:f}
+.flow li::before{content:counter(f);font-size:.72em;color:var(--coral);letter-spacing:.06em}
+.flow li + li::after{content:"";position:absolute;left:-1.25em;top:50%;width:.8em;height:.8em;border-top:.2em solid var(--ink);border-right:.2em solid var(--ink);transform:translateY(-50%) rotate(45deg)}
+.flow.n5 li,.flow.n6 li{font-size:.98em;padding:.7em .6em .8em}
+.flow.plus li + li::after{content:"+";border:0;transform:translateY(-50%);width:auto;height:auto;left:-1.05em;font-size:1.2em;color:var(--ink)}
+.flow .eqr{background:var(--ink);color:var(--cream)}
+.flow .eqr::after{content:"="!important;border:0!important;transform:translateY(-50%)!important;width:auto!important;height:auto!important;left:-1.05em!important;font-size:1.2em;color:var(--ink)}
+
+/* 카드: 2~4칸 */
+.cards2{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:1em}
+.cards2 li{background:#fff;border:2.5px solid var(--ink);border-radius:.7em;padding:.9em 1em 1em;display:flex;flex-direction:column;gap:.35em}
+.cards2 li > b{font-size:1.45em;font-weight:900;line-height:1.22;letter-spacing:-.02em}
+.cards2 li > p{font-size:1em;color:var(--mute);line-height:1.4}
+.cards2 li:first-child{border-color:var(--coral);box-shadow:inset 0 .35em 0 var(--coral)}
+.cards2.sm li > b{font-size:1.18em}
+.chips2{display:flex;flex-wrap:wrap;gap:.5em}
+.chips2 li{font-weight:900;font-size:1.25em;padding:.3em .9em;border-radius:99px;border:2.5px solid var(--ink);background:#fff}
+
+/* 비교: A ≠ B */
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:1em;align-items:center}
+.vs > div{background:#fff;border:2.5px solid var(--ink);border-radius:.7em;padding:1em;font-size:1.6em;font-weight:900;text-align:center;line-height:1.25}
+.vs > i{font-style:normal;font-size:2.6em;font-weight:900;color:var(--coral)}
+
+/* 빈칸 문장 */
+.frame2{font-size:1.65em;font-weight:900;line-height:1.7;background:#fff;border:2.5px solid var(--ink);border-radius:.6em;padding:.7em 1em}
+.frame2 u{text-decoration:none;display:inline-block;min-width:3.2em;border-bottom:.12em solid var(--coral);margin:0 .12em;height:1.1em;vertical-align:-.15em}
+
+/* 그림책 문장 한 쪽 */
+.page{position:relative;background:#FFFDF8;border:2.5px solid var(--ink);border-radius:.3em 1em 1em .3em;padding:1em 1.4em 1.1em 1.8em;box-shadow:.5em .5em 0 rgba(22,20,26,.12);font-size:1.75em;font-weight:900;line-height:1.5;max-width:24em}
+.page::before{content:"";position:absolute;left:.55em;top:.5em;bottom:.5em;width:.12em;border-radius:1em;background:rgba(22,20,26,.15)}
+.page small{display:block;font-size:.5em;color:var(--mute);letter-spacing:.12em;margin-bottom:.3em}
+
+/* 실습 장면: 도장 + 체크 목록 + 타이머 */
+.prac-tag{display:inline-flex;align-items:center;gap:.4em;font-weight:900;font-size:.8em;letter-spacing:.06em;color:#fff;background:var(--coral);border-radius:99px;padding:.15em .8em}
+.checks{display:flex;flex-direction:column;gap:.5em}
+.checks li{display:flex;gap:.6em;align-items:center;font-size:1.45em;font-weight:900;line-height:1.3;background:#fff;border:2.5px solid var(--ink);border-radius:.6em;padding:.45em .8em}
+.checks li::before{content:"";flex:none;width:.95em;height:.95em;border:.12em solid var(--ink);border-radius:.18em;background:#fff}
+.prac{display:grid;grid-template-columns:1fr auto;gap:2em;align-items:center}
+.tbtn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.1em;width:6.4em;height:6.4em;border-radius:50%;background:var(--ink);color:var(--cream);font-weight:900;box-shadow:0 .5em 1.2em -.5em rgba(22,20,26,.6)}
+.tbtn b{font-size:2.1em;line-height:1}
+.tbtn span{font-size:.72em;letter-spacing:.08em;opacity:.85}
+.tbtn:hover{transform:translateY(-2px)}
+body.locked .tbtn{display:none}
+
+/* 화면 캡처 자리 · 가상 자료 종이 */
+.g.cap .gbody,.g.dat .gbody{display:grid;grid-template-columns:1fr 1.05fr;gap:1.6em;align-items:center}
+.g.cap .flow,.g.dat .flow{flex-direction:column;gap:.9em}
+.g.cap .flow li,.g.dat .flow li{flex-direction:row;align-items:baseline;gap:.6em;padding:.45em .8em;font-size:1.05em}
+.g.cap .flow li + li::after,.g.dat .flow li + li::after{left:1.1em;top:-.62em;transform:translateY(-50%) rotate(135deg);width:.45em;height:.45em;border-width:.14em}
+.g.cap .flow.plus li + li::after,.g.dat .flow.plus li + li::after{content:"+";transform:translateY(-50%);left:.9em;top:-.5em;font-size:.9em}
+.g.cap .cards2,.g.dat .cards2{grid-template-columns:1fr}
+.g.cap .cards2 li,.g.dat .cards2 li{flex-direction:row;align-items:baseline;gap:.6em;padding:.5em .8em}
+.g.cap .cards2 li > b{font-size:1.15em;flex:none}
+.g.cap .big{font-size:1.75em}.g.cap .big.m{font-size:1.5em}.g.cap .big.l{font-size:1.3em}
+.shot{aspect-ratio:16/10;margin:0}
+.shot .slot-empty p{font-size:1.05em}
+.shot .slot-empty small{font-size:.66em;max-width:30em}
+.sheet{background:#fff;border:2.5px solid var(--ink);border-radius:.5em;padding:.8em 1em;font-size:.72em;line-height:1.55;white-space:pre-wrap;max-height:15.5em;overflow:auto;box-shadow:.4em .4em 0 rgba(22,20,26,.12)}
+.sheet > b{display:block;font-size:.95em;color:var(--coral);margin-bottom:.3em;white-space:normal}
+table.csv{border-collapse:collapse;font-size:1.25em;background:#fff}
+table.csv td,table.csv th{border:2px solid var(--ink);padding:.3em .9em;text-align:center}
+table.csv th{background:var(--ink);color:var(--cream)}
+
+/* 요청문 띠: 발표 모드는 한 줄 + 복사, 읽기 모드는 전문 */
+.pbox{display:flex;align-items:center;gap:.7em;background:rgba(255,255,255,.65);border:2.5px dashed var(--ink);border-radius:.6em;padding:.4em .5em .4em .8em;font-size:.82em}
+.pbox .pb-l{flex:none;font-weight:900;color:var(--coral)}
+.pbox .pb-t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#3a3540}
+.pbox .pb-c{flex:none;font-weight:900;font-size:.9em;padding:.3em .9em;border-radius:99px;background:var(--ink);color:var(--cream)}
+.pb-full{display:none;white-space:pre-wrap;font:inherit;font-size:.82em;line-height:1.6;background:#fff;border:2px solid var(--ink);border-radius:.5em;padding:.8em 1em}
+body[data-mode="read"] .pbox .pb-t{display:none}
+body[data-mode="read"] .pb-full{display:block}
+
+/* 발표 모드 배치: 세로 꽉 채우기 */
+body[data-mode="present"] .g:not(.s-cover){display:flex;flex-direction:column}
+body[data-mode="present"] .g .gbody{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;margin-top:.6em}
+body[data-mode="present"] .g.cap .gbody,body[data-mode="present"] .g.dat .gbody{display:grid}
+body[data-mode="present"] .gicon{position:absolute;right:0;top:-.3em}
+
+/* 읽기 모드: 장마다 작은 카드 */
+body[data-mode="read"] .g .gbody{margin-top:1em}
+body[data-mode="read"] .g .head{padding-right:4em}
+body[data-mode="read"] .gicon{width:3.4em;height:3.4em}
+@media (max-width:760px){
+  .flow{flex-direction:column;gap:.9em}
+  .flow li + li::after{left:1.1em;top:-.62em;transform:translateY(-50%) rotate(135deg);width:.45em;height:.45em}
+  .cards2{grid-template-columns:1fr}
+  .g.cap .gbody,.g.dat .gbody,.prac,.vs{grid-template-columns:1fr}
+  .vs > i{text-align:center}
+}
+
+/* ----- 노트 ----- */
+.nt .nm{color:var(--mute);font-size:.92em}
+.nt .nm b{color:var(--ink);margin-right:.35em}
+
+/* ----- 표지 공통 ----- */
+.s-cover .cover-art{width:47%;position:relative}
+.cart{width:100%;height:auto;display:block;overflow:visible}
+.cart .art{mix-blend-mode:multiply}
+.cart [data-d]{transition:transform .08s linear}
+body[data-mode="read"] .s-cover{flex-wrap:wrap}
+body[data-mode="read"] .s-cover .cover-art{width:100%;max-width:640px;margin:0 auto}
+.mission4{display:grid;grid-template-columns:1fr 1fr;gap:.45em 1.2em;margin-top:1.4em}
+.mission4 li{display:flex;gap:.5em;align-items:baseline;font-size:1.25em;line-height:1.3}
+.mission4 b{color:var(--coral);font-weight:900;font-size:1.15em}
+.ey-pill{display:inline-block;background:var(--ink);color:var(--cream);border-radius:99px;padding:.1em .7em;margin-right:.5em}
+.hero-lead{font-size:1.45em;margin-top:.9em;line-height:1.35}
+body[data-mode="present"] .s-cover{padding-top:90px}
+
+/* ----- 그림책 한 권 펼침 (002·087) ----- */
+.bookgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9em}
+.bookgrid li{position:relative;background:#FFFDF8;border:2.5px solid var(--ink);border-radius:.25em .8em .8em .25em;padding:.6em .8em .7em 1em;display:grid;grid-template-columns:auto 1fr;gap:.6em;align-items:center;min-height:5.6em}
+.bookgrid li img{width:3.6em;height:3.6em;object-fit:contain;mix-blend-mode:multiply}
+.bookgrid li small{display:block;font-size:.62em;color:var(--coral);letter-spacing:.1em;font-weight:900}
+.bookgrid li p{font-size:.86em;line-height:1.42}
+.bookgrid li.cv{background:var(--ink);color:var(--cream)}
+.bookgrid li.cv p{font-size:1.25em;font-weight:900}
+.bookgrid li.cv small{color:var(--yel)}
+
+/* ----- 평가표 (AI 049) ----- */
+table.score{width:100%;border-collapse:separate;border-spacing:0;background:#fff;border:2.5px solid var(--ink);border-radius:.6em;overflow:hidden;font-size:.78em}
+table.score th,table.score td{padding:.38em .7em;border-bottom:1.5px solid rgba(22,20,26,.15);text-align:left;line-height:1.3}
+table.score th{background:var(--ink);color:var(--cream)}
+table.score td:first-child{font-weight:900;white-space:nowrap}
+table.score tr:last-child td{border-bottom:0}
+.warnrow{margin-top:.6em;font-size:.85em;font-weight:900;color:var(--coral)}
+
+/* ----- 계산 (AI 058) ----- */
+.calc{display:flex;gap:1.2em;align-items:center;flex-wrap:wrap}
+.calc > div{background:#fff;border:2.5px solid var(--ink);border-radius:.7em;padding:.6em 1em;text-align:center}
+.calc > div b{display:block;font-size:2.4em;line-height:1.05}
+.calc > div span{font-size:.8em;color:var(--mute)}
+.calc .res{background:var(--ink);color:var(--cream)}
+.calc .res span{color:#cfc6b6}
+.calc i{font-style:normal;font-size:2em;font-weight:900;color:var(--coral)}
+
+/* ----- 마지막 장 단추 ----- */
+.endbtns{display:flex;gap:.8em;flex-wrap:wrap;margin-top:.4em}
+
+/* ----- 화면 문구만 있는 장: 오른쪽 큰 그림 + 글을 크게 ----- */
+.g.art .gicon{display:none}
+.g.art .gbody,body[data-mode="present"] .g.art .gbody{display:grid;grid-template-columns:1fr 15.5em;gap:2.2em;align-items:center}
+.gart{margin:0;position:relative;display:flex;align-items:center;justify-content:center;aspect-ratio:1}
+.gart::before{content:"";position:absolute;inset:4%;border-radius:46% 54% 50% 50%/55% 45% 55% 45%;background:rgba(255,91,58,.09)}
+.gart img{position:relative;width:88%;height:88%;object-fit:contain;mix-blend-mode:multiply;transform:rotate(-4deg)}
+body[data-mode="present"] .slide.active .gart img{animation:gfloat 5.5s ease-in-out infinite}
+body.lite .gart img{animation:none!important}
+@keyframes gfloat{50%{transform:rotate(2deg) translateY(-12px)}}
+.g.art .big,.g.wide .big{font-size:2.9em}.g.art .big.m,.g.wide .big.m{font-size:2.45em}.g.art .big.l,.g.wide .big.l{font-size:2em}
+.g.art .flow li,.g.wide .flow li{font-size:1.4em;min-height:4.4em;padding:.9em 1em 1em}
+.g.wide .flow.n5 li,.g.wide .flow.n6 li{font-size:1.15em;min-height:5em}
+.g.art .cards2 li,.g.wide .cards2 li{min-height:5.4em;padding:1.1em 1.2em 1.2em}
+.g.art .cards2 li > b,.g.wide .cards2 li > b{font-size:1.8em}
+.g.art .cards2.sm li > b,.g.wide .cards2.sm li > b{font-size:1.4em}
+.g.art .chips2 li,.g.wide .chips2 li{font-size:1.5em}
+.g.art .page{font-size:2em}
+.g.art .frame2,.g.wide .frame2{font-size:1.9em}
+.g.wide .vs > div{font-size:2em;padding:1.4em 1em}
+.g-prac .checks li{font-size:1.65em;padding:.55em .9em}
+.g-prac .tbtn{width:7.4em;height:7.4em}
+
+/* 큰 글은 줄 길이를 고르게 (엔진의 pretty 보다 우선) */
+.g .big,.g .title,.cards2 li > b,.flow li,.vs > div,.checks li,.page,.frame2{text-wrap-style:balance!important}
+.g.wide .flow.n5 li,.g.wide .flow.n6 li{min-height:6.2em}
+.endbtns{margin-top:1.2em}
+.nw{white-space:nowrap}

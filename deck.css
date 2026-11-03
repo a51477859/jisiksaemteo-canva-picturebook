@@ -1,0 +1,26 @@
+/* Canva 그림책 덱 전용: 연필 커서 · 표지(펼친 그림책에 빗방울이 모인다) */
+html,body{cursor:url(assets/cursor/pencil.svg) 2 2,auto}
+a,button,label,summary,select,[role="button"],[role="slider"],.progress .bar,.zp-host img.zp{cursor:url(assets/cursor/pencil_on.svg) 2 2,pointer}
+input[type="text"],input[type="password"],textarea{cursor:text}
+
+.book-art .bk-cover{fill:var(--coral);stroke:var(--ink);stroke-width:6;stroke-linejoin:round}
+.book-art .bk-page{fill:#FFFDF8;stroke:var(--ink);stroke-width:5;stroke-linejoin:round}
+.book-art .bk-fold{stroke:rgba(22,20,26,.22);stroke-width:4}
+.book-art .bk-lines path{fill:none;stroke:rgba(22,20,26,.13);stroke-width:6;stroke-linecap:round}
+.book-art image{transform-box:fill-box;transform-origin:50% 100%}
+.book-art .moru{animation:bob 4.2s ease-in-out infinite}
+.book-art .nuri{animation:crawl 6s ease-in-out infinite}
+.book-art .cloud image{animation:bob 5s ease-in-out infinite reverse}
+@keyframes bob{50%{transform:translateY(-10px)}}
+@keyframes crawl{50%{transform:translateX(-14px)}}
+.book-art .pot-dry,.book-art .pot-wet{transition:opacity .7s}
+.book-art .pot-wet{opacity:0}
+.book-art.grown .pot-wet{opacity:1}
+.book-art.grown .pot-dry{opacity:0}
+.book-art .drop{fill:#8ACDF7;stroke:var(--ink);stroke-width:3.5;stroke-linejoin:round}
+.book-art .splash{fill:none;stroke:#5BA8E8;stroke-width:4}
+.book-art .spark{fill:var(--yel);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+body.lite .book-art image{animation:none}
+.drop-count{position:absolute;left:4%;top:2%;display:flex;align-items:baseline;gap:.35em;font-weight:900;background:#fff;border:3px solid var(--ink);border-radius:99px;padding:.15em .9em;box-shadow:4px 4px 0 var(--ink);font-size:.9em}
+.drop-count b{font-size:1.5em;color:#3C8BD6;min-width:.7em;text-align:center;font-variant-numeric:tabular-nums}
+.drop-count span{color:var(--mute)}
